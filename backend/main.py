@@ -7,6 +7,8 @@ import time
 #from Scrapper import run_scrapper  
 #from fastapi_utils.tasks import repeat_every
 
+from model import Query
+from generator import fetch_video_data, get_api
 app = FastAPI()
 origins = ['http://localhost:3000']
 
@@ -18,16 +20,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
 
-@app.get("/api/results")
-async def get_teams():
-    responses = []
-    for name in names:
-        response = await fetch_all_teams(name)
-        response = (name, response)
-        responses.append(response)
-    return responses
+@app.post("/api/Query")
+async def create_item(item: Query):
+    video_data = await fetch_video_data(item)
+    return video_data
+
+@app.lifespan("startup")
+async def startup_event():
+    # Initialize the API at startup
+    await get_api()
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=3000)
