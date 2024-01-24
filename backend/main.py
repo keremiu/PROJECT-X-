@@ -1,16 +1,14 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import  CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.interval import IntervalTrigger
-import time
-#from Scrapper import run_scrapper  
-#from fastapi_utils.tasks import repeat_every
 
 from model import Query
 from generator import fetch_video_data, get_api
+
 app = FastAPI()
-origins = ['http://localhost:3000']
+
+# CORS için tüm kökenlere izin ver
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,7 +16,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    origins = ["*"],
 )
 
 @app.get("/")
@@ -36,4 +33,5 @@ async def startup_event():
     await get_api()
     
 if __name__ == '__main__':
-    uvicorn.run(app, host="127.0.0.1", port=3000)
+    # Tüm ağ arayüzlerinden erişime izin ver
+    uvicorn.run(app, host="0.0.0.0", port=3000)
