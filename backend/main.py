@@ -29,7 +29,7 @@ async def create_item(item: Query):
     video_data = await fetch_video_data(item)
     return video_data
 
-@app.lifespan("startup")
+@app.on_event("startup")
 async def startup_event():
     # Initialize the API at startup
     await get_api()
