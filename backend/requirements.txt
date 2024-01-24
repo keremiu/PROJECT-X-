@@ -1,0 +1,15 @@
+pornhub-api==0.3.0
+
+fastapi == 0.68.1
+
+uvicorn == 0.15.0
+
+numpy == 1.26.3
+
+pandas == 2.0.2
+
+APScheduler == 3.10.1
+
+fastapi-utils == 0.2.1
+
+pymongo[srv]==3.12.0
