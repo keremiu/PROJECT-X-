@@ -23,12 +23,18 @@ async def fetch_video_data(query: Query):
     if api_instance is None:
         await get_api()  
 
-    videos = await api_instance.search.search_videos(
-        query.name,
-        ordering=query.ordering,
-        period=query.period,
-        tags=query.tags
-    )
+    # API çağrısında kullanılacak parametreleri hazırla
+    search_params = {}
+    if query.name:
+        search_params["q"] = query.name
+    if query.ordering:
+        search_params["ordering"] = query.ordering
+    if query.period:
+        search_params["period"] = query.period
+    if query.tags:
+        search_params["tags"] = query.tags
+
+    videos = await api_instance.search.search_videos(**search_params)
     video_list = [video for video in videos]  # videos iterable'ını bir listeye dönüştür
 
     if video_list:
@@ -41,3 +47,4 @@ async def fetch_video_data(query: Query):
     else:
         # Return a message if no videos are found
         return {"message": "No videos found"}
+
