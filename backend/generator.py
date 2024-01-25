@@ -12,8 +12,8 @@ api_instance = None
 async def get_api():
     global api_instance
     if api_instance is None:
-        async with AioHttpBackend() as backend:
-            api_instance = PornhubApi(backend=backend)
+        backend = AioHttpBackend()  # Oturum açık tutuluyor
+        api_instance = PornhubApi(backend=backend)
     return api_instance
 
 # İçe aktarmalar ve global değişkenler
