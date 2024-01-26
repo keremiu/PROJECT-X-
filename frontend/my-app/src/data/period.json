@@ -1,0 +1,5 @@
+[
+    { "period" : "weekly"},
+    { "period" : "monthly"},
+    { "period" : "alltime"}
+]

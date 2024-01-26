@@ -1,0 +1,6 @@
+[
+    { "ordering" : "featured"},
+    { "ordering" : "newest"},
+    { "ordering" : "mostviewed"},
+    { "ordering" : "rating"}
+]
