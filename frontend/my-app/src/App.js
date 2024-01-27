@@ -1,42 +1,29 @@
+// App.js
 import './App.css';
-import { useState } from "react"
+import SearchBar from './SearchBar';
+import categories from "./data/categories.json";
+import ordering from "./data/ordering.json";
+import period from "./data/period.json";
+import tags from "./data/tags.json";
 
-var categories = require("./data/categories.json");
+// Diğer JSON dosyalarını da burada içe aktarın
 
 function App() {
-  const [value, setValue] = useState('');
-
-  const onChange = (event) => {
-    setValue(event.target.value);
-  }
-
-  const onSearch = (searchTerm) => {
-    setValue(searchTerm);
-    console.log("search ", searchTerm);
-  }
-  
   return (
     <div className="App">
-      <h1>Category</h1>
-      <div className="search-container">
-        <div className="search-inner">
-          <input type="text" value={value} onChange={onChange}></input>
+      <h1>Category Search</h1>
+      <SearchBar data={categories} />
 
-        </div>
-        <div className='dropdown'>
-          {categories.filter(item => {
-            const searchTerm = value.toLowerCase();
-            const cat = item.key.toLowerCase();
+      <h1>Tags Search</h1>
+      <SearchBar data={tags} />
 
-            return searchTerm && cat.includes(searchTerm) && searchTerm !== cat
-          }).map((item) => (
-          <div onClick={() => onSearch(item.key)}
-          className='dropdown-row' 
-          key={item.key}> 
-          {item.key}</div>
-          ))} 
-        </div>
-      </div>
+      <h1>Ordering Search</h1>
+      <SearchBar data={ordering} />
+
+      <h1>Period Search</h1>
+      <SearchBar data={period} />
+
+      {/* Diğer JSON dosyaları için SearchBar bileşenlerini burada ekleyin */}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 [
-    { "ordering" : "featured"},
-    { "ordering" : "newest"},
-    { "ordering" : "mostviewed"},
-    { "ordering" : "rating"}
+    { "key" : "featured"},
+    { "key" : "newest"},
+    { "key" : "mostviewed"},
+    { "key" : "rating"}
 ]
